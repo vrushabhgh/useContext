@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react"
-import UserContext from "./usercontext"
+import {  useEffect, useState } from "react"
+
 export default function Userlist() {
 
    
