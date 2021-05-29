@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
-import {useContext} from "react"
+import { useContext, useEffect, useState } from "react"
 import UserContext from "./usercontext"
 export default function Userlist() {
-    let users = useContext(UserContext)
+
+    let users = useContext(UserContext);
+    let [UserList, setUserList] = useState([]);
+
+    useEffect(async () => {
+        let users = await fetch("https://60a77f763b1e13001717643d.mockapi.io/users/users");
+        let userData = await users.json();
+        console.log(userData);
+        setUserList([...userData])
+    },[])
+
     return <>
         <div className="container-fluid">
 
@@ -32,34 +42,34 @@ export default function Userlist() {
                             </thead>
                             <tfoot>
                                 <tr>
-                                <th>Frist Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Password</th>
+                                    <th>Frist Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
                                     <th>Start date</th>
                                     <th>Salary</th>
                                 </tr>
                             </tfoot>
-                            <tbody>
-                                {
-                                    users.userList.map((obj) => {
-                                        return <tr>
-                                            <td>{obj.fristName}</td>
-                                            <td>{obj.lastName} </td>
-                                            <td>{obj.Email}</td>
-                                            <td>{obj.password}</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                            <td><Link to="/useredit/1">User Edit</Link></td>
-                                        </tr>
 
-                                    })
-                                }
+                            {
+                                UserList.map((obj) => {
+                                    return <tr>
+                                        <td>{obj.fristname}</td>
+                                        <td>{obj.lastname} </td>
+                                        <td>{obj.email}</td>
+                                        <td>{obj.password}</td>
+                                        <td>2011/04/25</td>
+                                        <td>$320,800</td>
+                                        <td><Link to="/useredit/1">User Edit</Link></td>
+                                    </tr>
 
-
+                                })
+                            }
 
 
-                            </tbody>
+
+
+
                         </table>
                     </div>
                 </div>

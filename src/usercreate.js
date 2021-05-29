@@ -1,4 +1,4 @@
-import {useState,useContext} from "react";
+import {useState,useContext, useEffect} from "react";
 import UserContext from "./usercontext"
 export default function Usercreate() {
 
@@ -26,6 +26,12 @@ let  usersubmit = (e) => {
 
     }])
 }
+//componet life cycyle hook
+//1 creating
+//2 updating
+//3 destroy
+
+
 
     return <>
         <form onSubmit={usersubmit}>

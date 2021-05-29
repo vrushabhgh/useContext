@@ -1,73 +1,15 @@
 import { Link } from "react-router-dom";
-import {useContext} from "react"
+import {useContext,useState,useEffect} from "react"
 import UserContext from "./usercontext"
 export default function Product(){
   let prodata=useContext(UserContext)
-    let valuedata=[
-        {
-          id: "1",
-          product_name: "Tasty Granite Towels",
-          product_price: "143.00",
-          product_description: "Pants",
-          rating: 4,
-          edit:"/productcard/1"
-          
-        },
-        {
-          id: "2",
-          product_name: "Licensed Steel Chicken",
-          product_price: "716.00",
-          product_description: "Bacon",
-          rating: 5,
-          edit:"/productcard/2"
-          
-        },
-        {
-          id: "3",
-          product_name: "Generic Steel Hat",
-          product_price: "449.00",
-          product_description: "Computer",
-          rating: 3,
-          edit:"/productcard/3"
-         
-        },
-        {
-          id: "4",
-          product_name: "Handmade Fresh Mouse",
-          product_price: "426.00",
-          product_description: "Soap",
-          rating: 2,
-          edit:"/productcard/4"
-          
-        },
-        {
-          id: "5",
-          product_name: "Licensed Granite Chips",
-          product_price: "512.00",
-          product_description: "Chair",
-          rating: 4,
-          edit:"/productcard/5"
-         
-        },
-        {
-          id: "6",
-          product_name: "Intelligent Wooden Keyboard",
-          product_price: "731.00",
-          product_description: "Table",
-          rating: 4,
-          edit:"/productcard/6"
-          
-        },
-        {
-          id: "7",
-          product_name: "Intelligent Hammer",
-          product_price: "331.00",
-          product_description: "Hammer",
-          rating: 5,
-          edit:"/productcard/7"
-         
-        },
-      ];
+  let [UserList, setUserList] = useState([]);
+  useEffect(async () => {
+    let pusers = await fetch("https://60a77f763b1e13001717643d.mockapi.io/users/product");
+    let puserData = await pusers.json();
+    console.log(puserData);
+    setUserList([...puserData])
+},[])
     return <>
    <div class="container-fluid">
 
@@ -97,13 +39,13 @@ For more information about DataTables, please visit the </p>
                 </thead>
                
                 <tbody>
-              { valuedata.map((obj)=>{
+              { UserList.map((obj)=>{
                   return <>
                       <tr>
                       <th> {obj.id}</th>
-                      <th>{obj.product_name}</th>
-                      <th>{obj.product_description}</th>
-                      <th>{obj.product_price}</th>
+                      <th>{obj.productname}</th>
+                      <th>{obj.productdiscription}</th>
+                      <th>{obj.productprice}</th>
                       <th>{obj.rating}</th>
                       <td><Link to={obj.edit}>View product discription</Link></td>
                       </tr>
