@@ -4,12 +4,24 @@ import UserContext from "./usercontext"
 export default function Product(){
   let prodata=useContext(UserContext)
   let [UserList, setUserList] = useState([]);
-  useEffect(async () => {
+ // useEffect(async () => {
+  //  let pusers = await fetch("https://60a77f763b1e13001717643d.mockapi.io/users/product");
+  //  let puserData = await pusers.json();
+   // console.log(puserData);
+   // setUserList([...puserData])
+//},[])
+
+ useEffect(()=>{
+   async function pfetchdata(){
     let pusers = await fetch("https://60a77f763b1e13001717643d.mockapi.io/users/product");
     let puserData = await pusers.json();
     console.log(puserData);
     setUserList([...puserData])
-},[])
+   }
+   pfetchdata();
+ },[])
+
+
     return <>
    <div class="container-fluid">
 
