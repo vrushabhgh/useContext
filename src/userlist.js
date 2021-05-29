@@ -6,12 +6,23 @@ export default function Userlist() {
    
     let [UserList, setUserList] = useState([]);
 
-    useEffect(async () => {
-        let users = await fetch("https://60a77f763b1e13001717643d.mockapi.io/users/users");
-        let userData = await users.json();
-        console.log(userData);
-        setUserList([...userData])
-    },[])
+    //useEffect(async () => {
+      //  let users = await fetch("https://60a77f763b1e13001717643d.mockapi.io/users/users");
+      //  let userData = await users.json();
+     //   console.log(userData);
+     //   setUserList([...userData])
+   // },[])
+
+    useEffect(() => {
+        async function fetchData() {
+            let users = await fetch("https://60a77f763b1e13001717643d.mockapi.io/users/users");
+            let userData = await users.json();
+            console.log(userData);
+            setUserList([...userData]);
+        }
+        fetchData();
+    }, []);
+
 
     return <>
         <div className="container-fluid">
