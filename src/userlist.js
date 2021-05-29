@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import UserContext from "./usercontext"
 export default function Userlist() {
 
-    let users = useContext(UserContext);
+   
     let [UserList, setUserList] = useState([]);
 
     useEffect(async () => {
